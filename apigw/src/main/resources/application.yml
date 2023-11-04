@@ -1,6 +1,13 @@
 spring:
   application:
     name: api-getway
+  cloud:
+    gateway:
+      routes:
+        - id: customer
+          uri: lb://CUSTOMER
+          predicates:
+            - Path=/api/v1/customers/**
 
 
 server:
