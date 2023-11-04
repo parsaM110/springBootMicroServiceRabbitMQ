@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: api-getway
+
+
+server:
+  port: 8083
+
+application:
+  title: getway
+  version: 1.0.0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true # the default is true anyway
+    register-with-eureka: true # the default is true anyway
+
