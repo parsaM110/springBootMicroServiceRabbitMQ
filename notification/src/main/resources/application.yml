@@ -16,6 +16,7 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+
 application:
   title: notification
   version: 1.0.0
@@ -26,3 +27,13 @@ eureka:
       defaultZone: http://localhost:8761/eureka
     fetch-registry: true # the default is true anyway
     register-with-eureka: true # the default is true anyway
+
+rabbitmq:
+  exchanges:
+    internal: internal.exchange
+  queue:
+    notification : notification.queue
+  routing-keys:
+    internal-notification : internal.notification.routing-key
+
+
