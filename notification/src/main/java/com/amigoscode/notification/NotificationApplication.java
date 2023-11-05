@@ -28,10 +28,12 @@ public class NotificationApplication {
         return args -> {
             System.out.println("📕" + "Sending message...");
             producer.publish(
-                   "foo",
+                   new Person("John", 20),
                     notificationConfig.getInternalExchange(),
                     notificationConfig.getInternalNotificationRoutingKey()
             );
         };
     }
+
+    record Person(String name, int age ){}
 }
