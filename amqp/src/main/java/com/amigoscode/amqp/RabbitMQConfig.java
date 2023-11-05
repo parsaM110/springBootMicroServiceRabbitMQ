@@ -1,6 +1,6 @@
 package com.amigoscode.amqp;
 
-
+import lombok.AllArgsConstructor;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,9 +11,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@AllArgsConstructor
 public class RabbitMQConfig {
 
-    private ConnectionFactory connectionFactory;
+    private final ConnectionFactory connectionFactory;
 
     @Bean
     public AmqpTemplate amqpTemplate() {
@@ -22,19 +23,20 @@ public class RabbitMQConfig {
         return rabbitTemplate;
     }
 
-
     @Bean
-    public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory(){
-        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+    public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory() {
+        SimpleRabbitListenerContainerFactory factory =
+                new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(jacksonConverter());
         return factory;
     }
 
-
     @Bean
     public MessageConverter jacksonConverter() {
-        MessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
+        MessageConverter jackson2JsonMessageConverter =
+                new Jackson2JsonMessageConverter();
         return jackson2JsonMessageConverter;
     }
+
 }
